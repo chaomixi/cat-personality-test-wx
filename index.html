@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>你是什么猫咪性格？</title>
+<style>*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}:root{--pink:#FF8FAB;--orange:#FFB347;--cream:#FFF8F0;--dark:#3D2C2C}html,body{width:100%;height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--cream);color:var(--dark)}.app{width:100%;height:100%;position:relative;overflow:hidden}.screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .4s,visibility .4s;z-index:1}.screen.active{opacity:1;visibility:visible;pointer-events:auto;z-index:10}#screen-start{background:linear-gradient(135deg,#FFE8F0 0%,#FFF0E6 50%,#E8F4FD 100%);padding:24px;text-align:center}.start-cat{width:200px;height:200px;margin:0 auto 20px;position:relative;animation:float 3s ease-in-out infinite}.cat-face{width:160px;height:140px;background:var(--orange);border-radius:50% 50% 45% 45%;position:absolute;bottom:0;left:50%;transform:translateX(-50%);box-shadow:0 8px 24px rgba(255,179,71,.3)}.cat-ear{width:0;height:0;border-left:28px solid transparent;border-right:28px solid transparent;border-bottom:50px solid var(--orange);position:absolute;top:-10px}.cat-ear.left{left:16px;transform:rotate(-15deg)}.cat-ear.right{right:16px;transform:rotate(15deg)}.cat-ear-inner{width:0;height:0;border-left:16px solid transparent;border-right:16px solid transparent;border-bottom:32px solid var(--pink);position:absolute;top:12px;left:-16px}.cat-eye{width:24px;height:28px;background:#333;border-radius:50%;position:absolute;top:50px;animation:blink 3s infinite}.cat-eye.left{left:30px}.cat-eye.right{right:30px}.cat-eye::after{content:'';width:8px;height:8px;background:#fff;border-radius:50%;position:absolute;top:6px;left:6px}.cat-nose{width:12px;height:10px;background:var(--pink);border-radius:50% 50% 50% 50%/30% 30% 70% 70%;position:absolute;top:80px;left:50%;transform:translateX(-50%)}.cat-mouth{width:30px;height:14px;border-bottom:2px solid #333;border-radius:0 0 50% 50%;position:absolute;top:88px;left:50%;transform:translateX(-50%)}.cat-whisker{width:40px;height:2px;background:#333;position:absolute;top:82px}.cat-whisker.l1{left:-10px;transform:rotate(-5deg)}.cat-whisker.l2{left:-8px;top:90px;transform:rotate(5deg)}.cat-whisker.r1{right:-10px;transform:rotate(5deg)}.cat-whisker.r2{right:-8px;top:90px;transform:rotate(-5deg)}.cat-blush{width:20px;height:12px;background:rgba(255,143,171,.4);border-radius:50%;position:absolute;top:78px}.cat-blush.left{left:16px}.cat-blush.right{right:16px}.cat-tail{width:80px;height:40px;border:4px solid var(--orange);border-color:var(--orange) transparent transparent transparent;border-radius:50%;position:absolute;bottom:10px;right:-30px;transform:rotate(-30deg);animation:tailWag 1.5s ease-in-out infinite}@keyframes blink{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}@keyframes tailWag{0%,100%{transform:rotate(-30deg)}50%{transform:rotate(-10deg)}}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}.start-title{font-size:28px;font-weight:800;color:var(--dark);margin-bottom:8px;line-height:1.3}.start-subtitle{font-size:15px;color:#888;margin-bottom:32px;line-height:1.5}.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 48px;border-radius:50px;font-size:18px;font-weight:700;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;letter-spacing:1px}.btn:active{transform:scale(.95)}.btn-primary{background:linear-gradient(135deg,var(--pink),#FF6B8A);color:#fff;box-shadow:0 6px 20px rgba(255,107,138,.4)}.btn-secondary{background:linear-gradient(135deg,var(--orange),#FF9A3E);color:#fff;box-shadow:0 6px 20px rgba(255,154,62,.4);margin-top:12px;font-size:15px;padding:12px 36px}#screen-question{background:var(--cream);padding:20px}.q-progress{width:100%;max-width:340px;height:6px;background:#F0E0D0;border-radius:3px;margin-bottom:20px;overflow:hidden}.q-progress-bar{height:100%;background:linear-gradient(90deg,var(--pink),var(--orange));border-radius:3px;transition:width .4s ease}.q-card{background:#fff;border-radius:24px;padding:28px 24px;width:100%;max-width:340px;box-shadow:0 4px 20px rgba(0,0,0,.06);text-align:center}.q-number{font-size:13px;color:#aaa;margin-bottom:8px}.q-text{font-size:20px;font-weight:700;color:var(--dark);margin-bottom:24px;line-height:1.5}.q-options{display:flex;flex-direction:column;gap:12px}.q-option{display:flex;align-items:center;gap:12px;padding:14px 18px;border:2px solid #F0E8E0;border-radius:16px;cursor:pointer;transition:all .2s;background:#fff;text-align:left}.q-option:active{transform:scale(.97)}.q-option.selected{border-color:var(--pink);background:#FFF0F3}.q-option-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}.q-option-icon.a{background:#FFF0E6}.q-option-icon.b{background:#E8F4FD}.q-option-icon.c{background:#F0E6FF}.q-option-icon.d{background:#E6F8EA}.q-option-text{font-size:15px;color:var(--dark);line-height:1.4;font-weight:500}
+.q-nav{display:flex;justify-content:center;margin-top:16px}
+.q-nav .btn-back{padding:10px 28px;border-radius:50px;font-size:14px;font-weight:600;border:2px solid #F0E8E0;background:#fff;color:#888;cursor:pointer;transition:all .2s}
+.q-nav .btn-back:active{transform:scale(.95);background:#F8F8F8}#screen-result{background:linear-gradient(135deg,#FFF0F3 0%,#FFF8F0 50%,#F0F0FF 100%);padding:20px;text-align:center;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%}.result-card{background:#fff;border-radius:24px;padding:24px;width:100%;max-width:340px;box-shadow:0 8px 32px rgba(0,0,0,.08)}.result-badge{display:inline-block;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:12px;color:#fff}.result-rarity{display:inline-block;padding:4px 14px;border-radius:12px;font-size:12px;font-weight:700;margin-bottom:10px;letter-spacing:1px}.result-rarity.rarity-rare{background:linear-gradient(135deg,#E1BEE7,#CE93D8);color:#7B1FA2}.result-rarity.rarity-legendary{background:linear-gradient(135deg,#FFF9C4,#FFE082,#FFD54F);color:#E65100;animation:legendaryGlow 2s ease-in-out infinite;box-shadow:0 0 12px rgba(255,193,7,.4)}@keyframes legendaryGlow{0%,100%{box-shadow:0 0 8px rgba(255,193,7,.3)}50%{box-shadow:0 0 20px rgba(255,193,7,.6)}}.result-rarity-desc{font-size:12px;color:#888;margin-bottom:12px;font-style:italic}.result-emoji{width:100px;height:100px;margin:0 auto 12px;border-radius:50%;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1)}.result-emoji.rarity-rare-img{box-shadow:0 0 0 3px #CE93D8,0 4px 16px rgba(156,39,176,.3)}.result-emoji.rarity-legendary-img{box-shadow:0 0 0 3px #FFD54F,0 0 20px rgba(255,193,7,.4);animation:legendaryImgGlow 2s ease-in-out infinite}@keyframes legendaryImgGlow{0%,100%{box-shadow:0 0 0 3px #FFD54F,0 0 12px rgba(255,193,7,.3)}50%{box-shadow:0 0 0 4px #FFE082,0 0 24px rgba(255,193,7,.5)}}.result-emoji img{width:100%;height:100%;object-fit:cover}.result-name{font-size:24px;font-weight:800;margin-bottom:8px}.result-desc{font-size:15px;color:#666;margin-bottom:16px;line-height:1.6}.result-traits{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:16px}.result-trait{padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600}.result-match{font-size:14px;color:#FF6B8A;margin-bottom:12px;line-height:1.5}.result-share{font-size:13px;color:#999;line-height:1.5}#screen-share-card{background:rgba(0,0,0,.7);padding:20px;z-index:50;overflow-y:auto;display:flex;align-items:center;justify-content:center}.share-card-wrap{width:100%;max-width:340px;margin:auto}.share-card{width:100%;border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 8px 32px rgba(0,0,0,.2)}.share-card-header{padding:24px 20px 16px;text-align:center;background:linear-gradient(135deg,#FFE8F0,#FFF0E6,#E8F4FD)}.share-card-header .sc-emoji{width:72px;height:72px;margin-bottom:8px;margin-left:auto;margin-right:auto;border-radius:50%;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)}.share-card-header .sc-emoji img{width:100%;height:100%;object-fit:cover}.share-card-header .sc-badge{display:inline-block;padding:4px 14px;border-radius:16px;font-size:11px;font-weight:600;color:#fff;margin-bottom:4px}.share-card-header .sc-rarity{display:inline-block;padding:3px 12px;border-radius:12px;font-size:10px;font-weight:700;margin-bottom:8px;letter-spacing:1px}.share-card-header .sc-rarity.rarity-rare{background:linear-gradient(135deg,#E1BEE7,#CE93D8);color:#7B1FA2}.share-card-header .sc-rarity.rarity-legendary{background:linear-gradient(135deg,#FFF9C4,#FFE082,#FFD54F);color:#E65100}.share-card-header .sc-name{font-size:22px;font-weight:800;color:#3D2C2C}.share-card-body{padding:16px 20px}.share-card-body .sc-desc{font-size:13px;color:#666;line-height:1.7;margin-bottom:12px}.share-card-body .sc-traits{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}.share-card-body .sc-trait{padding:4px 12px;border-radius:14px;font-size:12px;font-weight:600}.share-card-body .sc-match{font-size:14px;color:#FF6B8A;line-height:1.5;margin-bottom:12px}.share-card-footer{padding:12px 20px 16px;text-align:center;border-top:1px solid #F0E8E0}.share-card-footer .sc-cta{font-size:14px;font-weight:700;color:#FF6B8A;margin-bottom:4px}.share-card-footer .sc-link{font-size:11px;color:#bbb;word-break:break-all}.sc-qr-area{margin-top:14px;text-align:center}.sc-qr-box{display:inline-block;padding:8px;background:#fff;border:2px solid #F0E8E0;border-radius:12px;margin-bottom:6px}.sc-qr-box canvas{display:block;width:120px;height:120px}.sc-qr-text{font-size:12px;color:#999;line-height:1.4}.share-card-actions{display:flex;gap:12px;margin-top:16px;justify-content:center}.share-card-actions .btn{flex:1;max-width:160px;padding:12px 20px;font-size:15px}.float-heart{position:absolute;font-size:20px;animation:heartFloat 3s ease-out forwards;pointer-events:none;z-index:100}@keyframes heartFloat{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-120px) scale(.5)}}.paw-prints{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}.paw{position:absolute;font-size:16px;opacity:.08;animation:pawDrift 8s linear infinite}@keyframes pawDrift{0%{transform:translateY(100vh) rotate(0deg)}100%{transform:translateY(-100px) rotate(360deg)}}.loading-dots{display:flex;gap:6px;justify-content:center;margin:16px 0}.loading-dots span{width:8px;height:8px;background:var(--pink);border-radius:50%;animation:dotBounce .6s ease-in-out infinite}.loading-dots span:nth-child(2){animation-delay:.1s}.loading-dots span:nth-child(3){animation-delay:.2s}@keyframes dotBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}@media(max-height:680px){.start-cat{width:150px;height:150px}.cat-face{width:120px;height:105px}.start-title{font-size:24px}.q-card{padding:20px 18px}.q-text{font-size:18px}}@media(min-width:500px){.q-card,.result-card,.share-card-wrap{max-width:400px}}</style>
+<meta name="format-detection" content="telephone=no">
+
+<meta name="format-detection" content="telephone=no">
+<meta name="description" content="快来测测你是什么猫咪性格吧！12种可爱猫咪等你来发现~">
+<meta property="og:title" content="你是什么猫咪性格？🐱">
+<meta property="og:description" content="回答8个小问题，测测你内心住着哪只猫！">
+<meta property="og:image" content="images/cat_00.jpg">
+<meta property="og:type" content="website">
+</head>
+<body><div id="app-loading" style="position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#FFE8F0,#FFF0E6,#E8F4FD);z-index:9999"><div style="font-size:60px;animation:bounce 1.5s ease-in-out infinite">🐱</div><p style="margin-top:16px;color:#888;font-size:14px">加载中...</p><style>@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}</style></div>
+<div class="app" id="app">
+  <div class="paw-prints" id="pawPrints"></div>
+  <div class="screen active" id="screen-start">
+    <div class="start-cat">
+      <div class="cat-face">
+        <div class="cat-ear left"><div class="cat-ear-inner"></div></div>
+        <div class="cat-ear right"><div class="cat-ear-inner"></div></div>
+        <div class="cat-eye left"></div>
+        <div class="cat-eye right"></div>
+        <div class="cat-nose"></div>
+        <div class="cat-mouth"></div>
+        <div class="cat-whisker l1"></div><div class="cat-whisker l2"></div>
+        <div class="cat-whisker r1"></div><div class="cat-whisker r2"></div>
+        <div class="cat-blush left"></div>
+        <div class="cat-blush right"></div>
+      </div>
+      <div class="cat-tail"></div>
+    </div>
+    <h1 class="start-title">你是什么猫咪性格？</h1>
+    <p class="start-subtitle">回答8个小问题<br>测测你内心住着哪只猫 🐱</p>
+    <button class="btn btn-primary" id="btn-start">开始测试</button>
+  </div>
+  <div class="screen" id="screen-question">
+    <div class="q-progress"><div class="q-progress-bar" id="q-progress-bar"></div></div>
+    <div class="q-card">
+      <div class="q-number" id="q-number"></div>
+      <div class="q-text" id="q-text"></div>
+      <div class="q-options" id="q-options"></div>
+      <div class="q-nav" id="q-nav"></div>
+    </div>
+  </div>
+  <div class="screen" id="screen-loading">
+    <div class="start-cat" style="animation:float 2s ease-in-out infinite;width:120px;height:120px">
+      <div class="cat-face" style="width:100px;height:88px">
+        <div class="cat-ear left" style="left:10px;border-left-width:20px;border-right-width:20px;border-bottom-width:36px"><div class="cat-ear-inner" style="border-left-width:12px;border-right-width:12px;border-bottom-width:22px;left:-12px;top:9px"></div></div>
+        <div class="cat-ear right" style="right:10px;border-left-width:20px;border-right-width:20px;border-bottom-width:36px"><div class="cat-ear-inner" style="border-left-width:12px;border-right-width:12px;border-bottom-width:22px;left:-12px;top:9px"></div></div>
+        <div class="cat-eye left" style="left:18px;top:32px;width:18px;height:20px"></div>
+        <div class="cat-eye right" style="right:18px;top:32px;width:18px;height:20px"></div>
+        <div class="cat-nose" style="top:52px;width:10px;height:8px"></div>
+        <div class="cat-mouth" style="top:58px;width:24px"></div>
+      </div>
+    </div>
+    <p style="font-size:16px;color:#888;margin-top:20px">正在分析你的猫咪基因...</p>
+    <div class="loading-dots"><span></span><span></span><span></span></div>
+  </div>
+  <div class="screen" id="screen-result">
+    <div class="result-card" id="result-card"></div>
+    <button class="btn btn-primary" id="btn-retry" style="margin-top:16px">再测一次</button>
+    <button class="btn btn-primary" id="btn-share" style="margin-top:12px">分享给朋友 🐾</button>
+  </div>
+
+<script>
+(function(){
+  'use strict';
+  var CONFIG = { h5Url: '', wxName: '你的微信号' };
+  var questions = [
+    { text: '周末早上醒来，你最想做什么？', options: [
+      { icon: '🛏️', cls: 'a', text: '继续睡到自然醒，被窝太舒服了', type: 'lazy' },
+      { icon: '🏃', cls: 'b', text: '出门运动或探索新地方', type: 'active' },
+      { icon: '📱', cls: 'c', text: '刷手机看视频，享受独处时光', type: 'cool' },
+      { icon: '🍳', cls: 'd', text: '给家人做一顿丰盛的早餐', type: 'sweet' }
+    ]},
+    { text: '朋友突然来访，你的反应是？', options: [
+      { icon: '😻', cls: 'a', text: '超开心！马上冲过去迎接', type: 'clingy' },
+      { icon: '🍔', cls: 'b', text: '太好了！一起点外卖看电影', type: 'foodie' },
+      { icon: '😰', cls: 'c', text: '有点慌，希望提前说一声', type: 'shy' },
+      { icon: '🎉', cls: 'd', text: '太好了！拉他们出去浪', type: 'naughty' }
+    ]},
+    { text: '面对一个全新的挑战，你会？', options: [
+      { icon: '😤', cls: 'a', text: '直接冲！不试试怎么知道', type: 'brave' },
+      { icon: '🤔', cls: 'b', text: '先观察分析，制定详细计划', type: 'elegant' },
+      { icon: '🙈', cls: 'c', text: '有点犹豫，想找个人一起', type: 'shy' },
+      { icon: '💪', cls: 'd', text: '相信自己能搞定，加油！', type: 'proud' }
+    ]},
+    { text: '你理想中的生活状态是？', options: [
+      { icon: '🌿', cls: 'a', text: '安静地待在舒适的小窝里', type: 'lazy' },
+      { icon: '👑', cls: 'b', text: '做自己领域里的王者', type: 'proud' },
+      { icon: '🎨', cls: 'c', text: '追求有品质的精致生活', type: 'elegant' },
+      { icon: '🍔', cls: 'd', text: '有好吃的就够了，简单快乐', type: 'foodie' }
+    ]},
+    { text: '在人群中，你通常是？', options: [
+      { icon: '🤫', cls: 'a', text: '安静观察的角落小透明', type: 'shy' },
+      { icon: '✨', cls: 'b', text: '天马行空的创意输出机', type: 'dreamy' },
+      { icon: '🥰', cls: 'c', text: '温柔照顾每个人的暖心担当', type: 'sweet' },
+      { icon: '🛡️', cls: 'd', text: '默默守护大家的可靠存在', type: 'brave' }
+    ]},
+    { text: '如果可以拥有一种超能力，你选？', options: [
+      { icon: '🔥', cls: 'a', text: '瞬间移动，想去哪就去哪', type: 'active' },
+      { icon: '💫', cls: 'b', text: '读心术，看透每个人的想法', type: 'cool' },
+      { icon: '🧸', cls: 'c', text: '治愈之力，让所有人都开心', type: 'sweet' },
+      { icon: '🐾', cls: 'd', text: '和动物交流的能力', type: 'dreamy' }
+    ]},
+    { text: '收到一份意外的礼物，你会？', options: [
+      { icon: '😆', cls: 'a', text: '超激动！马上拆开看看', type: 'lazy' },
+      { icon: '🥺', cls: 'b', text: '感动到想哭，默默记住这份心意', type: 'clingy' },
+      { icon: '😏', cls: 'c', text: '内心开心但表面淡定', type: 'cool' },
+      { icon: '🤩', cls: 'd', text: '马上发朋友圈分享喜悦', type: 'foodie' }
+    ]},
+    { text: '下面哪个场景最吸引你？', options: [
+      { icon: '🎮', cls: 'a', text: '和朋友组队打比赛', type: 'brave' },
+      { icon: '🌙', cls: 'b', text: '一个人安静地看星星发呆', type: 'proud' },
+      { icon: '😜', cls: 'c', text: '搞点恶作剧逗大家开心', type: 'naughty' },
+      { icon: '🎭', cls: 'd', text: '去一个从没去过的地方旅行', type: 'dreamy' }
+    ]}
+  ];
+  var results = {
+    lazy: { name: '橘猫型 · 快乐宅家猫', emoji: 'images/cat_00.jpg', badge: '十橘九胖', badgeColor: 'linear-gradient(135deg,#FFB347,#FF9A3E)', desc: '你就像一只慵懒的大橘猫，享受生活中的每一个舒适瞬间。你不追求轰轰烈烈，只想要安安稳稳的幸福。', traits: [{text:'佛系随缘',bg:'#FFF0E6',color:'#E68A00'},{text:'享受独处',bg:'#E8F4FD',color:'#4A90D9'},{text:'知足常乐',bg:'#E6F8EA',color:'#4CAF50'},{text:'温暖治愈',bg:'#FFF0F3',color:'#FF6B8A'}], match: '最佳搭档：布偶猫型（他们会主动来找你玩~）' },
+    cool: { name: '黑猫型 · 高冷神秘猫', emoji: 'images/cat_01.jpg', badge: '暗夜王者', badgeColor: 'linear-gradient(135deg,#666,#333)', desc: '你就像一只优雅的黑猫，自带神秘光环。你不轻易表露情感，但一旦认定一个人，就会全心全意。', traits: [{text:'独立自主',bg:'#F0F0F0',color:'#555'},{text:'洞察力强',bg:'#F0E6FF',color:'#9B59B6'},{text:'高冷外表',bg:'#E8E8E8',color:'#333'},{text:'内心柔软',bg:'#FFF0F3',color:'#FF6B8A'}], match: '最佳搭档：暹罗猫型（他们能跟上你的节奏~）' },
+    active: { name: '暹罗猫型 · 活力探险猫', emoji: 'images/cat_02.jpg', badge: '永动机', badgeColor: 'linear-gradient(135deg,#87CEEB,#4A90D9)', desc: '你就像一只精力充沛的暹罗猫，永远充满好奇心和行动力。世界就是你的游乐场，每一天都是新的冒险！', traits: [{text:'精力旺盛',bg:'#E8F4FD',color:'#4A90D9'},{text:'好奇心强',bg:'#FFF0E6',color:'#E68A00'},{text:'社交达人',bg:'#E6F8EA',color:'#4CAF50'},{text:'勇于冒险',bg:'#F0E6FF',color:'#9B59B6'}], match: '最佳搭档：橘猫型（他们会陪你疯，也会帮你休息~）' },
+    sweet: { name: '布偶猫型 · 甜心治愈猫', emoji: 'images/cat_03.jpg', badge: '人间小天使', badgeColor: 'linear-gradient(135deg,#FF8FAB,#FF6B8A)', desc: '你就像一只温柔的布偶猫，天生自带治愈光环。你善良体贴，总是把别人的感受放在第一位。', traits: [{text:'温柔体贴',bg:'#FFF0F3',color:'#FF6B8A'},{text:'善解人意',bg:'#F0E6FF',color:'#9B59B6'},{text:'值得信赖',bg:'#E8F4FD',color:'#4A90D9'},{text:'默默付出',bg:'#E6F8EA',color:'#4CAF50'}], match: '最佳搭档：黑猫型（他们会默默守护你~）' },
+    shy: { name: '英短型 · 害羞小甜豆', emoji: 'images/cat_04.jpg', badge: '社恐本恐', badgeColor: 'linear-gradient(135deg,#B8D4E3,#7FB3D3)', desc: '你就像一只圆脸大眼的英短蓝猫，看起来总是一副受惊的小表情。你内心丰富但慢热，熟了之后会变成粘人的小可爱。', traits: [{text:'慢热型',bg:'#EBF5FB',color:'#5DADE2'},{text:'内心丰富',bg:'#F0E6FF',color:'#9B59B6'},{text:'敏感细腻',bg:'#FFF0F3',color:'#FF6B8A'},{text:'熟人面前超嗨',bg:'#E6F8EA',color:'#4CAF50'}], match: '最佳搭档：暹罗猫型（他们会主动带你融入圈子~）' },
+    proud: { name: '狮子猫型 · 自信大主角', emoji: 'images/cat_05.jpg', badge: '全场最靓', badgeColor: 'linear-gradient(135deg,#F9E79F,#F4D03F)', desc: '你就像一只气场全开的狮子猫，走到哪里都是焦点。你自信、有主见，天生就有一种让人信服的领导力。', traits: [{text:'自信满满',bg:'#FEF9E7',color:'#D4AC0D'},{text:'有主见',bg:'#FFF0E6',color:'#E68A00'},{text:'领导力强',bg:'#E8F4FD',color:'#4A90D9'},{text:'不服输',bg:'#F0E6FF',color:'#9B59B6'}], match: '最佳搭档：英短型（他们会默默支持你~）' },
+    foodie: { name: '加菲猫型 · 快乐小吃货', emoji: 'images/cat_06.jpg', badge: '干饭王', badgeColor: 'linear-gradient(135deg,#FFAB40,#FF6D00)', desc: '你就像一只乐天的加菲猫，人生最大的快乐就是吃！你乐观豁达，觉得没有什么是一顿美食解决不了的。', traits: [{text:'乐天派',bg:'#FFF0E6',color:'#E68A00'},{text:'美食达人',bg:'#E6F8EA',color:'#4CAF50'},{text:'随遇而安',bg:'#E8F4FD',color:'#4A90D9'},{text:'简单快乐',bg:'#FFF0F3',color:'#FF6B8A'}], match: '最佳搭档：美短型（他们会陪你到处找好吃的~）' },
+    elegant: { rarity: '🌈 传说', rarityCls: 'rarity-legendary', rarityDesc: '🔥 超稀有！不到3%的人才能获得，你太特别了！', name: '波斯猫型 · 优雅小贵族', emoji: 'images/cat_07.jpg', badge: '气质担当', badgeColor: 'linear-gradient(135deg,#CE93D8,#AB47BC)', desc: '你就像一只高贵的波斯猫，举手投足间自带优雅气质。你注重生活品质，追求内心的宁静与美好。', traits: [{text:'优雅从容',bg:'#F3E5F5',color:'#9C27B0'},{text:'品味不凡',bg:'#FFF0E6',color:'#E68A00'},{text:'内心宁静',bg:'#E8F4FD',color:'#4A90D9'},{text:'注重细节',bg:'#E6F8EA',color:'#4CAF50'}], match: '最佳搭档：英短型（他们会安静地陪在你身边~）' },
+    naughty: { rarity: '💎 稀有', rarityCls: 'rarity-rare', rarityDesc: '哇！只有少数人能测出这个结果！快分享给朋友看看~', name: '美短型 · 调皮小捣蛋', emoji: 'images/cat_08.jpg', badge: '闯祸精', badgeColor: 'linear-gradient(135deg,#81C784,#43A047)', desc: '你就像一只活泼的美短猫，永远闲不住！你聪明机灵，脑子里总有一万个鬼点子，是朋友圈里的气氛担当。', traits: [{text:'古灵精怪',bg:'#E6F8EA',color:'#4CAF50'},{text:'创意无限',bg:'#F0E6FF',color:'#9B59B6'},{text:'幽默风趣',bg:'#FFF0E6',color:'#E68A00'},{text:'活力四射',bg:'#E8F4FD',color:'#4A90D9'}], match: '最佳搭档：暹罗猫型（你们在一起就是一场冒险~）' },
+    clingy: { rarity: '💎 稀有', rarityCls: 'rarity-rare', rarityDesc: '哇！只有少数人能测出这个结果！快分享给朋友看看~', name: '折耳猫型 · 粘人小甜心', emoji: 'images/cat_09.jpg', badge: '撒娇精', badgeColor: 'linear-gradient(135deg,#F48FB1,#E91E63)', desc: '你就像一只软萌的折耳猫，天生就是撒娇高手。你喜欢和喜欢的人待在一起，分开一秒都会想念。', traits: [{text:'超级粘人',bg:'#FFF0F3',color:'#FF6B8A'},{text:'温柔可爱',bg:'#F3E5F5',color:'#9C27B0'},{text:'感情丰富',bg:'#E8F4FD',color:'#4A90D9'},{text:'需要陪伴',bg:'#FFF0E6',color:'#E68A00'}], match: '最佳搭档：加菲猫型（他们会一直陪着你~）' },
+    brave: { name: '缅因猫型 · 勇敢大英雄', emoji: 'images/cat_10.jpg', badge: '安全感爆棚', badgeColor: 'linear-gradient(135deg,#90A4AE,#455A64)', desc: '你就像一只威武的缅因猫，天生就有一种让人安心的气场。你勇敢可靠，是朋友们最坚实的后盾。', traits: [{text:'勇敢果断',bg:'#ECEFF1',color:'#546E7A'},{text:'可靠担当',bg:'#E8F4FD',color:'#4A90D9'},{text:'保护欲强',bg:'#FFF0E6',color:'#E68A00'},{text:'大气豪爽',bg:'#E6F8EA',color:'#4CAF50'}], match: '最佳搭档：折耳猫型（他们会安心地躲在你身后~）' },
+    dreamy: { rarity: '💎 稀有', rarityCls: 'rarity-rare', rarityDesc: '哇！只有少数人能测出这个结果！快分享给朋友看看~', name: '三花猫型 · 浪漫梦想家', emoji: 'images/cat_11.jpg', badge: '脑洞少女/少年', badgeColor: 'linear-gradient(135deg,#FFB74D,#FF7043)', desc: '你就像一只独特的三花猫，充满了奇思妙想。你的世界总是五彩斑斓的，脑子里装满了浪漫的梦想。', traits: [{text:'想象力丰富',bg:'#FFF3E0',color:'#E64A19'},{text:'浪漫主义',bg:'#F3E5F5',color:'#9C27B0'},{text:'独特个性',bg:'#E8F4FD',color:'#4A90D9'},{text:'艺术天赋',bg:'#FFF0F3',color:'#FF6B8A'}], match: '最佳搭档：波斯猫型（你们能一起欣赏生活的美~）' }
+  };
+  var currentQ = 0, answers = [], canClick = true;
+  var isWechat = /MicroMessenger/i.test(navigator.userAgent);
+  var app = document.getElementById('app');
+  var btnStart = document.getElementById('btn-start');
+  var btnRetry = document.getElementById('btn-retry');
+  var btnShare = document.getElementById('btn-share');
+      var qProgressBar = document.getElementById('q-progress-bar');
+  var qNumber = document.getElementById('q-number');
+  var qText = document.getElementById('q-text');
+  var qOptions = document.getElementById('q-options');
+  var resultCard = document.getElementById('result-card');
+  function createPaws() {
+    var c = document.getElementById('pawPrints');
+    for (var i = 0; i < 8; i++) {
+      var p = document.createElement('div');
+      p.className = 'paw';
+      p.textContent = '🐾';
+      p.style.left = (Math.random() * 90 + 5) + '%';
+      p.style.animationDelay = (Math.random() * 8) + 's';
+      p.style.animationDuration = (6 + Math.random() * 6) + 's';
+      p.style.fontSize = (12 + Math.random() * 12) + 'px';
+      c.appendChild(p);
+    }
+  }
+  function showScreen(id) {
+    var screens = document.querySelectorAll('.screen');
+    for (var i = 0; i < screens.length; i++) screens[i].classList.remove('active');
+    var t = document.getElementById(id);
+    if (t) t.classList.add('active');
+  }
+  function spawnHeart(x, y) {
+    var h = document.createElement('div');
+    h.className = 'float-heart';
+    h.textContent = ['❤️','💕','💗','✨','🐾'][Math.floor(Math.random()*5)];
+    h.style.left = x + 'px';
+    h.style.top = y + 'px';
+    app.appendChild(h);
+    setTimeout(function(){ h.remove(); }, 3000);
+  }
+  var qNav = document.getElementById('q-nav');
+  function renderQuestion() {
+    var q = questions[currentQ];
+    qProgressBar.style.width = (currentQ/questions.length*100)+'%';
+    qNumber.textContent = '问题 ' + (currentQ+1) + ' / ' + questions.length;
+    qText.textContent = q.text;
+    qOptions.innerHTML = '';
+    // 上一题按钮
+    if(currentQ > 0){
+      qNav.innerHTML = '<button class="btn-back" id="btn-prev">⬅ 上一题</button>';
+      document.getElementById('btn-prev').addEventListener('click',function(){
+        answers.pop();
+        currentQ--;
+        canClick = true;
+        renderQuestion();
+      });
+    } else {
+      qNav.innerHTML = '';
+    }
+    for (var i = 0; i < q.options.length; i++) {
+      (function(idx){
+        var opt = q.options[idx];
+        var div = document.createElement('div');
+        div.className = 'q-option';
+        div.innerHTML = '<div class="q-option-icon '+opt.cls+'">'+opt.icon+'</div><div class="q-option-text">'+opt.text+'</div>';
+        div.addEventListener('click', function(e){
+          if (!canClick) return;
+          canClick = false;
+          var all = qOptions.querySelectorAll('.q-option');
+          for (var j=0;j<all.length;j++) all[j].classList.remove('selected');
+          div.classList.add('selected');
+          var rect = div.getBoundingClientRect();
+          spawnHeart(rect.left+rect.width/2, rect.top);
+          qProgressBar.style.width = ((currentQ+1)/questions.length*100)+'%';
+          answers.push(opt.type);
+          setTimeout(function(){
+            currentQ++;
+            if (currentQ < questions.length) { renderQuestion(); canClick = true; }
+            else { showResult(); }
+          }, 400);
+        });
+        qOptions.appendChild(div);
+      })(i);
+    }
+  }
+  function getMajorType() {
+    var counts = {lazy:0,cool:0,active:0,sweet:0,shy:0,proud:0,clingy:0,foodie:0,elegant:0,naughty:0,brave:0,dreamy:0};
+    for (var i=0;i<answers.length;i++) { if(counts[answers[i]]!==undefined) counts[answers[i]]++; }
+    var max='lazy', maxC=0;
+    for (var t in counts) { if(counts[t]>maxC){maxC=counts[t];max=t;} }
+    return max;
+  }
+  function getResult() { return results[getMajorType()]; }
+  function showResult() {
+    showScreen('screen-loading');
+    setTimeout(function(){
+      var r = getResult();
+      var traitsHtml = '';
+      for (var i=0;i<r.traits.length;i++){
+        var t = r.traits[i];
+        traitsHtml += '<span class="result-trait" style="background:'+t.bg+';color:'+t.color+'">'+t.text+'</span>';
+      }
+      resultCard.innerHTML =
+        '<div class="result-badge" style="background:'+r.badgeColor+'">'+r.badge+'</div>' +
+        (r.rarity ? '<div class="result-rarity '+r.rarityCls+'">'+r.rarity+'</div>' : '') +
+        (r.rarityDesc ? '<p class="result-rarity-desc">'+r.rarityDesc+'</p>' : '') +
+        '<div class="result-emoji '+(r.rarityCls==='rarity-rare'?'rarity-rare-img':r.rarityCls==='rarity-legendary'?'rarity-legendary-img':'')+'"><img loading="lazy" src="'+r.emoji+'" alt="猫咪"></div>' +
+        '<h2 class="result-name">'+r.name+'</h2>' +
+        '<p class="result-desc">'+r.desc+'</p>' +
+        '<div class="result-traits">'+traitsHtml+'</div>' +
+        '<p class="result-match">💕 '+r.match+'</p>' +
+        '<p class="result-share">快分享给朋友，看看他们是什么猫咪性格吧~ 🐾</p>';
+      showScreen('screen-result');
+      try {
+        var history = JSON.parse(localStorage.getItem('cat_test_history')||'[]');
+        history.push({type:r.name,time:Date.now()});
+        if(history.length>20) history=history.slice(-20);
+        localStorage.setItem('cat_test_history',JSON.stringify(history));
+      } catch(e){}
+    }, 2000);
+  }
+  function showWechatShareTip(){
+    var overlay=document.createElement('div');
+    overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9998;display:flex;flex-direction:column;align-items:flex-end;padding:20px;padding-top:40px';
+    overlay.innerHTML='<div style="color:#fff;font-size:16px;font-weight:600;margin-bottom:8px">👆 点击右上角「...」</div><div style="color:#fff;font-size:14px;margin-bottom:24px">选择「发送给朋友」或「分享到朋友圈」</div><div style="color:rgba(255,255,255,.6);font-size:13px;margin-top:auto;align-self:center">点击任意位置关闭</div>';
+    overlay.addEventListener('click',function(){overlay.remove();});
+    document.body.appendChild(overlay);
+  }
+  function showToast(msg){
+    var t=document.createElement('div');
+    t.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.75);color:#fff;padding:10px 24px;border-radius:20px;font-size:14px;z-index:999;transition:opacity .3s';
+    t.textContent=msg; document.body.appendChild(t);
+    setTimeout(function(){t.style.opacity='0';},2000);
+    setTimeout(function(){t.remove();},2500);
+  }
+  btnStart.addEventListener('click',function(){currentQ=0;answers=[];canClick=true;renderQuestion();showScreen('screen-question');});
+  btnRetry.addEventListener('click',function(){currentQ=0;answers=[];canClick=true;renderQuestion();showScreen('screen-question');});
+  btnShare.addEventListener('click',function(){ showWechatShareTip(); });
+  document.addEventListener('touchstart',function(e){if(e.target.closest('.q-option')){var rect=e.target.closest('.q-option').getBoundingClientRect();spawnHeart(e.touches[0].clientX,rect.top);;}},{passive:true});
+  window.addEventListener('load',function(){
+    var ld=document.getElementById('app-loading');if(ld)ld.remove();
+    try{createPaws();}catch(e){
+      console.error(e);
+      var f=document.createElement('div');
+      f.style.cssText='position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#fff;color:#111;font-size:18px;padding:24px;text-align:center;z-index:9999;';
+      f.textContent='哎呀，出错了，请刷新试试吧~';
+      document.body.innerHTML='';document.body.appendChild(f);
+    }
+  });
+})();
+</script>
+</body>
+</html>
